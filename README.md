@@ -1,2 +1,3 @@
 # demo-aws-stepfunction
-Demo AWS Step Function
+Demo AWS Step Function and Lambdas using terraform
+
