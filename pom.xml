@@ -27,16 +27,12 @@
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>3.2.2</version>
 				<configuration>
-<!--					<createDependencyReducedPom>false</createDependencyReducedPom>-->
+					<createDependencyReducedPom>false</createDependencyReducedPom>
 					<filters>
 						<filter>
 							<artifact>*:*</artifact>
 							<excludes>
 								<exclude>terraform/**</exclude>
-								<exclude>lambdas/**</exclude>
-								<exclude>META-INF/*.SF</exclude>
-								<exclude>META-INF/*.DSA</exclude>
-								<exclude>META-INF/*.RSA</exclude>
 							</excludes>
 						</filter>
 					</filters>
