@@ -3,23 +3,38 @@ package com.github.demo.aws.lambda;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.amazonaws.util.StringUtils;
+import com.github.demo.aws.model.StepFunctionObj;
+import com.github.demo.aws.model.StepResult;
 import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.PathNotFoundException;
 
-public class ValidateLambda implements RequestHandler<Object, String> {
-    public String handleRequest(Object input, Context context) {
+public class ValidateLambda implements RequestHandler<Object, StepFunctionObj> {
+    public StepFunctionObj handleRequest(Object input, Context context) {
         return null;
     }
 
-    public String readInput(Object input, Context context) throws Exception {
+    public StepFunctionObj validate(Object input, Context context) throws Exception {
 
-        String bucketName = JsonPath.read(input, "$.event.Records[0].s3.bucket.name");
-        String keyName = JsonPath.read(input, "$.event.Records[0].s3.object.key");
-        System.out.println(String.format("Bucket name:%s Key:%s ", bucketName));
+        System.out.println(String.format("Input:%s ", input));
 
-        return "All good";
+        String bucket = JsonPath.read(input, "$.event.Records[0].s3.bucket.name");
+        String key = JsonPath.read(input, "$.event.Records[0].s3.object.key");
+
+        StepFunctionObj stepFunctionObj = new StepFunctionObj();
+
+        // Validate
+        if (bucket != null && key != null && bucket.length() > 0 && key.length() > 0) {
+            stepFunctionObj.setBucket(bucket);
+            stepFunctionObj.setKey(key);
+        } else {
+            throw new RuntimeException("Invalid input: " + stepFunctionObj);
+        }
+
+        stepFunctionObj.setValidate(new StepResult());
+        stepFunctionObj.getValidate().setCode("200");
+        stepFunctionObj.getValidate().setMessage("Validation completed successfully");
+
+        System.out.println("Input: " + stepFunctionObj);
+
+        return stepFunctionObj;
     }
 }
