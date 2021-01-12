@@ -13,7 +13,7 @@ First update the terraform variables accordingly at: terraform/variables.tf
 
 CD to terraform folder
 ````bash
-$ cd terraform
+$ cd terraform/environment/dev-01
 ````
 
 Init terraform
