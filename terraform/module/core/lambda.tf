@@ -3,7 +3,7 @@
 ########### Lambda ###########
 resource "aws_lambda_function" "demo-validate" {
   function_name     = "${var.environment_prefix}-demo-validate"
-  handler       = "com.github.demo.aws.lambda.ValidateLambda::validate"
+  handler       = "com.github.demo.aws.lambda.ValidateLambda::handleRequest"
   runtime       = "java8"
   role          = "${var.lambda_role_arn}"
   filename          = "../../../target/${var.jar_file}"
@@ -19,7 +19,7 @@ resource "aws_lambda_function" "demo-validate" {
 
 resource "aws_lambda_function" "demo-process" {
   function_name     = "${var.environment_prefix}-demo-process"
-  handler       = "com.github.demo.aws.lambda.ProcessLambda::process"
+  handler       = "com.github.demo.aws.lambda.ProcessLambda::handleRequest"
   runtime       = "java8"
   role          = "${var.lambda_role_arn}"
   filename          = "../../../target/${var.jar_file}"
@@ -35,7 +35,7 @@ resource "aws_lambda_function" "demo-process" {
 
 resource "aws_lambda_function" "demo-exception" {
   function_name     = "${var.environment_prefix}-demo-exception"
-  handler       = "com.github.demo.aws.lambda.ExceptionLambda::exception"
+  handler       = "com.github.demo.aws.lambda.ExceptionLambda::handleRequest"
   runtime       = "java8"
   role          = "${var.lambda_role_arn}"
   filename          = "../../../target/${var.jar_file}"
