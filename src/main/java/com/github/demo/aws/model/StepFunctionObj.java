@@ -7,7 +7,6 @@ public class StepFunctionObj {
     private StepResult validate;
     private StepResult process;
 
-
     public String getBucket() {
         return bucket;
     }
