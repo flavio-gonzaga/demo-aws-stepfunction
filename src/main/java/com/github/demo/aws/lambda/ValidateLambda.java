@@ -11,8 +11,8 @@ public class ValidateLambda implements RequestHandler<Object, StepFunctionObj> {
     public StepFunctionObj handleRequest(Object input, Context context) {
         System.out.println("input" + input);
 
-        String bucket = JsonPath.read(input, "$.event.Records[0].s3.bucket.name");
-        String key = JsonPath.read(input, "$.event.Records[0].s3.object.key");
+        String bucket = JsonPath.read(input, "$.event.records[0].s3.bucket.name");
+        String key = JsonPath.read(input, "$.event.records[0].s3.object.key");
 
         StepFunctionObj stepFunctionObj = new StepFunctionObj();
 

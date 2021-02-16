@@ -13,3 +13,9 @@ variable "lambda_role_arn" {
 variable "jar_file" {
 
 }
+variable "s3_bucket" {
+
+}
+variable "s3_bucket_arn" {
+
+}
